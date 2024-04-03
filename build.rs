@@ -349,7 +349,9 @@ fn build_translator(compiled_libraries: &mut HashSet<Libs>, target: &String) {
         // ensure cxx
         .clang_arg("-x")
         .clang_arg("c++")
-        .clang_arg("-std=c++17");
+        .clang_arg("-std=c++17")
+        .clang_arg("-msse2")
+        .clang_arg("-mavx");
 
     for func in ALLOWLIST_FN {
         builder = builder.allowlist_function(func)
