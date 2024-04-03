@@ -233,6 +233,8 @@ fn build_lib(compiled_libraries: &mut HashSet<Libs>, target: &String, lib: Libs)
 
     if target.contains("x86_64") || target.contains("i686") {
         build.flag_if_supported("-msse2"); // GNU
+        build.flag_if_supported("-mavx"); // GNU
+        build.flag_if_supported("-mavx2"); // GNU
         if target.contains("windows") {
             build.flag_if_supported("-arch:SSE2"); // MSVC
         }
@@ -296,6 +298,8 @@ fn build_translator(compiled_libraries: &mut HashSet<Libs>, target: &String) {
 
     if target.contains("x86_64") || target.contains("i686") {
         build.flag_if_supported("-msse2"); // GNU
+        build.flag_if_supported("-mavx"); // GNU
+        build.flag_if_supported("-mavx2"); // GNU
         if target.contains("windows") {
             build.flag_if_supported("-arch:SSE2"); // MSVC
         }
@@ -351,7 +355,8 @@ fn build_translator(compiled_libraries: &mut HashSet<Libs>, target: &String) {
         .clang_arg("c++")
         .clang_arg("-std=c++17")
         .clang_arg("-msse2")
-        .clang_arg("-mavx");
+        .clang_arg("-mavx")
+        .clang_arg("-mavx2");
 
     for func in ALLOWLIST_FN {
         builder = builder.allowlist_function(func)
