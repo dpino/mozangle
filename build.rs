@@ -232,9 +232,10 @@ fn build_lib(compiled_libraries: &mut HashSet<Libs>, target: &String, lib: Libs)
         .flag_if_supported("/wd9002");
 
     if target.contains("x86_64") || target.contains("i686") {
-        build
-            .flag_if_supported("-msse2") // GNU
-            .flag_if_supported("-arch:SSE2"); // MSVC
+        build.flag_if_supported("-msse2"); // GNU
+        if target.contains("windows") {
+            build.flag_if_supported("-arch:SSE2"); // MSVC
+        }
     }
 
     // Enable multiprocessing for faster builds.
@@ -294,9 +295,10 @@ fn build_translator(compiled_libraries: &mut HashSet<Libs>, target: &String) {
         .flag_if_supported("/wd9002");
 
     if target.contains("x86_64") || target.contains("i686") {
-        build
-            .flag_if_supported("-msse2") // GNU
-            .flag_if_supported("-arch:SSE2"); // MSVC
+        build.flag_if_supported("-msse2"); // GNU
+        if target.contains("windows") {
+            build.flag_if_supported("-arch:SSE2"); // MSVC
+        }
     }
 
     let out_dir = PathBuf::from(env::var_os("OUT_DIR").unwrap());
