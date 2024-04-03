@@ -50,7 +50,7 @@ def parse_mozbuild(directory, data, suffix=""):
             "SSE2_FLAGS": "",
             "OS_ARCH": "neither",
             "INTEL_ARCHITECTURE": "true",
-            "CC_TYPE": "gcc",
+            "CC_TYPE": "clang",
             "MOZ_X11_CFLAGS": "",
             "MOZ_WIDGET_TOOLKIT": "",
             "MOZ_WIDGET_GTK": "",
